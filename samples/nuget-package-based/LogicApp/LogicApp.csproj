@@ -29,6 +29,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Update="connections.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <LibDirectory Include="$(MSBuildProjectDirectory)\lib\**\*" />
   </ItemGroup>
   <Target Name="CopyDynamicLibraries" AfterTargets="_GenerateFunctionsExtensionsMetadataPostPublish">

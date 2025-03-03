@@ -1,10 +1,115 @@
 {
   "definition": {
-    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-    "actions": {},
-    "contentVersion": "1.0.0.0",
-    "outputs": {},
-    "triggers": {}
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+          "HTTP": {
+              "type": "Http",
+              "inputs": {
+                  "uri": "@triggerBody()?['urlToTest']",
+                  "method": "GET"
+              },
+              "runAfter": {},
+              "runtimeConfiguration": {
+                  "contentTransfer": {
+                      "transferMode": "Chunked"
+                  }
+              }
+          },
+          "Response": {
+              "type": "Response",
+              "kind": "Http",
+              "inputs": {
+                  "statusCode": "@outputs('HTTP')?['statusCode']",
+                  "body": {
+                      "status": "available"
+                  }
+              },
+              "runAfter": {
+                  "Track_availability_in_App_Insights": [
+                      "SUCCEEDED"
+                  ]
+              }
+          },
+          "Track_availability_in_App_Insights": {
+              "type": "ServiceProvider",
+              "inputs": {
+                  "parameters": {
+                      "testName": "@triggerBody()?['testName']",
+                      "success": true,
+                      "runLocation": "Sweden Central"
+                  },
+                  "serviceProviderConfiguration": {
+                      "connectionName": "trackAvailabilityInAppInsights",
+                      "operationId": "trackAvailabilityInAppInsights",
+                      "serviceProviderId": "/serviceProviders/trackAvailabilityInAppInsights"
+                  }
+              },
+              "runAfter": {
+                  "HTTP": [
+                      "SUCCEEDED"
+                  ]
+              }
+          },
+          "Track_unavailability_in_App_Insights": {
+              "type": "ServiceProvider",
+              "inputs": {
+                  "parameters": {
+                      "testName": "@triggerBody()?['testName']",
+                      "success": false,
+                      "runLocation": "Sweden Central"
+                  },
+                  "serviceProviderConfiguration": {
+                      "connectionName": "trackAvailabilityInAppInsights",
+                      "operationId": "trackAvailabilityInAppInsights",
+                      "serviceProviderId": "/serviceProviders/trackAvailabilityInAppInsights"
+                  }
+              },
+              "runAfter": {
+                  "HTTP": [
+                      "TIMEDOUT",
+                      "SKIPPED",
+                      "FAILED"
+                  ]
+              }
+          },
+          "Response_1": {
+              "type": "Response",
+              "kind": "Http",
+              "inputs": {
+                  "statusCode": 200,
+                  "body": {
+                      "status": "unavailable"
+                  }
+              },
+              "runAfter": {
+                  "Track_unavailability_in_App_Insights": [
+                      "SUCCEEDED"
+                  ]
+              }
+          }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "triggers": {
+          "When_a_HTTP_request_is_received": {
+              "type": "Request",
+              "kind": "Http",
+              "inputs": {
+                  "method": "POST",
+                  "schema": {
+                      "type": "object",
+                      "properties": {
+                          "testName": {
+                              "type": "string"
+                          },
+                          "urlToTest": {
+                              "type": "string"
+                          }
+                      }
+                  }
+              }
+          }
+      }
   },
   "kind": "Stateful"
 }
