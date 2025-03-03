@@ -485,3 +485,6 @@ $RECYCLE.BIN/
 
 # Ignore Draw.io backup files
 *.drawio.bkp
+
+# Local HTTP files
+*.local.http
