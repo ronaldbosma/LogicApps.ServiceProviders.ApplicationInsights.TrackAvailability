@@ -17,11 +17,11 @@ function add-extension
 
        [ValidateScript({
           if( -Not ($_ | Test-Path) ){
-             throw "Target project directory does not exist.. check TargetProjectDirectory parameter."
+             throw "Target project file does not exist.. check TargetProjectFile parameter."
           }
           return $true
        })]
-       [System.IO.FileInfo]$TargetProjectDirectory
+       [System.IO.FileInfo]$TargetProjectFile
    )
    process
    {
@@ -90,17 +90,9 @@ function add-extension
       $extensionFullName = $extensionName
       $startupClass = "$Name.TrackAvailabilityServiceProviderStartup"
 
-      try {
-         Push-Location $TargetProjectDirectory
-         
-            write-host "Add package to project in $TargetProjectDirectory"
-
-            # 1. Add Nuget package to existing project 
-         dotnet add package $extensionFullName --version $Version  --source $extensionPath
-      }
-      finally {
-         Pop-Location
-      }
+      write-host "Add package to project in $TargetProjectFile"
+      # 1. Add Nuget package to existing project 
+      dotnet add "$TargetProjectFile" package "$extensionFullName" --version "$Version" --source "$extensionPath"
 
       #  2. Update extensions.json under extension module
       $typeFullName =  $startupClass + ", " + $fullAssemlyName
@@ -132,14 +124,15 @@ function add-extension
 # execute the above function here.
 
 $scriptDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
-$rootPath = Join-Path -Path $scriptDir -ChildPath ".."
+$rootPath = (Get-Item -Path $scriptDir).Parent.FullName
 
 $nuGetPackagePath = Join-Path -Path $rootPath -ChildPath "src"
 $nuGetPackagePath = Join-Path -Path $nuGetPackagePath -ChildPath "bin"
 $nuGetPackagePath = Join-Path -Path $nuGetPackagePath -ChildPath "Debug"
 
-$targetProjectDirectory = Join-Path -Path $rootPath -ChildPath "samples"
-$targetProjectDirectory = Join-Path -Path $targetProjectDirectory -ChildPath "nuget-package-based"
-$targetProjectDirectory = Join-Path -Path $targetProjectDirectory -ChildPath "LogicApp"
+$targetProjectFile = Join-Path -Path $rootPath -ChildPath "samples"
+$targetProjectFile = Join-Path -Path $targetProjectFile -ChildPath "nuget-package-based"
+$targetProjectFile = Join-Path -Path $targetProjectFile -ChildPath "LogicApp"
+$targetProjectFile = Join-Path -Path $targetProjectFile -ChildPath "LogicApp.csproj"
 
-add-extension -Path $nuGetPackagePath -Name "LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability" -Version "0.1.0" -TargetProjectDirectory $targetProjectDirectory
+add-extension -Path $nuGetPackagePath -Name "LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability" -Version "0.1.0" -TargetProjectFile $targetProjectFile
