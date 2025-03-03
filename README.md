@@ -53,7 +53,7 @@ Follow these steps after deploying the sample Logic App to test it:
 1. Use the copied URL for the value of the `@workflowUrl` variable.
 1. Send the first request. A `200 OK` with status 'available` in the response body should be returned.
 1. Send the second request. A `503 Service Unavailable` with status 'unavailable` in the response body should be returned.
-
+1. Navigate to Application Insights and open the Availability tab. You should see the results for the `My Test` availability test (result might take a few minutes to appear).
 
 ## Troubleshoot
 
