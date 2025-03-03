@@ -20,29 +20,29 @@ You can now use the connector in the Visual Studio Code Logic App Designer.
 
 ## Deploy Sample
 
-There's a sample Logic App in `/samples/nuget-package-based/LogicApp` that uses the custom connector. Because of the custom connector, it's a NuGet package-based Logic App with a `.csproj` file. To deploy this sample, follow these steps:
+There's a [sample Logic App](/samples/nuget-package-based/LogicApp/) in `/samples/nuget-package-based/LogicApp` that uses the custom connector. Because of the custom connector, it's a NuGet package-based Logic App with a `.csproj` file. To deploy this sample, follow these steps:
 
-1. Deploy an Azure Logic App Standard connected to an Azure Application Insights instance, with .NET version `v6.0` or `v8.0`.)  
+1. Deploy an Azure Logic App Standard connected to an Azure Application Insights instance with .NET version `v6.0` or `v8.0`.  
 
+   > [!NOTE] 
    > You can use the [Azure Integration Services Quickstart](https://github.com/ronaldbosma/azure-integration-services-quickstart) Azure Developer CLI template to deploy the necessary resources. 
    > Use `azd provision` to only deploy the infra and specify `true` for the `includeLogicApp` parameter. Other parameters can be `false`.  
-   > Note this template sets the .NET version `v9.0`, but it will automatically be changed to `v8.0` in when using `func azure functionapp publish` in one of the following steps.
+   > Note this template sets the .NET version to `v9.0`, but it will automatically be changed to `v8.0` when using `func azure functionapp publish` to deploy the sample.
 
-1. Remove the extension bundle environment variables.
+1. Remove the extension bundle environment variables. his is necessary because the extension bundle else the extension won't be loaded.
    1. Navigate to the deployed Logic App and open the Environment variables tab. 
    1. Remove the `AzureFunctionsJobHost__extensionBundle__id` and `AzureFunctionsJobHost__extensionBundle__version` variables and save the changes. 
    
-   > This is necessary because the extension bundle else the extension won't be loaded.
-
-1. Deploy the [Sample Logic App](/samples/nuget-package-based/LogicApp/).
-   1. Open a prompt and navigate to the `/samples/nuget-package-based/LogicApp` directory.
+1. Deploy the sample.
+   1. Open a terminal and navigate to the `/samples/nuget-package-based/LogicApp` directory.
    1. Execute the following command. Replace `<logicAppName>` with your Logic App name. This will build and deploy the Logic App.
 
       ```bash
       func azure functionapp publish <logicAppName>
       ```
 
-   A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take awhile. 
+   > [!IMPORTANT] 
+   > A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take awhile. 
 
 ### Test
 
