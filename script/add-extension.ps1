@@ -13,7 +13,15 @@ function add-extension
        $Name,
 
        [String]
-       $Version
+       $Version,
+
+       [ValidateScript({
+          if( -Not ($_ | Test-Path) ){
+             throw "Target project directory does not exist.. check TargetProjectDirectory parameter."
+          }
+          return $true
+       })]
+       [System.IO.FileInfo]$TargetProjectDirectory
    )
    process
    {
@@ -54,9 +62,9 @@ function add-extension
             $latest = Get-ChildItem -Path $extensionModulePath | Sort-Object name -Descending | Select-Object -First 1
             $latest.name
 
-            $extensionModulePath = Join-Path -Path $extensionModulePath  -ChildPath $latest.name 
-            $extensionModulePath = Join-Path -Path $extensionModulePath  -ChildPath "bin"
-            $extensionModulePath = Join-Path -Path $extensionModulePath  -ChildPath "extensions.json"
+            $extensionModulePath = Join-Path -Path $extensionModulePath -ChildPath $latest.name 
+            $extensionModulePath = Join-Path -Path $extensionModulePath -ChildPath "bin"
+            $extensionModulePath = Join-Path -Path $extensionModulePath -ChildPath "extensions.json"
 
             if ( Test-Path -Path $extensionModulePath )
             {
@@ -81,8 +89,18 @@ function add-extension
             
             $extensionFullName = $extensionName
             $startupClass = "$Name.TrackAvailabilityServiceProviderStartup"
-            # 1. Add Nuget package to existing project 
-            dotnet add package $extensionFullName --version $Version  --source $extensionPath
+
+            try {
+               Push-Location $TargetProjectDirectory
+               
+                write-host "Add package to project in $TargetProjectDirectory"
+
+                # 1. Add Nuget package to existing project 
+               dotnet add package $extensionFullName --version $Version  --source $extensionPath
+            }
+            finally {
+               Pop-Location
+            }
 
             #  2. Update extensions.json under extension module
             $typeFullName =  $startupClass + ", " + $fullAssemlyName
@@ -114,6 +132,13 @@ function add-extension
 # execute the above function here.
 
 $scriptDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
-$nuGetPackagePath = Join-Path -Path $scriptDir -ChildPath "..\src\bin\Debug"
+$rootPath = Join-Path -Path $scriptDir -ChildPath ".."
 
-add-extension -Path $nuGetPackagePath -Name "LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability" -Version "0.1.0"
+$nuGetPackagePath = Join-Path -Path $rootPath -ChildPath "src"
+$nuGetPackagePath = Join-Path -Path $nuGetPackagePath -ChildPath "bin"
+$nuGetPackagePath = Join-Path -Path $nuGetPackagePath -ChildPath "Debug"
+
+$targetProjectDirectory = Join-Path -Path $rootPath -ChildPath "samples"
+$targetProjectDirectory = Join-Path -Path $targetProjectDirectory -ChildPath "nuget-package-based"
+
+add-extension -Path $nuGetPackagePath -Name "LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability" -Version "0.1.0" -TargetProjectDirectory $targetProjectDirectory
