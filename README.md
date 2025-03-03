@@ -42,7 +42,7 @@ There's a [sample Logic App](/samples/nuget-package-based/LogicApp/) in `/sample
       ```
 
 > [!IMPORTANT]  
-> A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take awhile. 
+> A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take a while. 
 
 ### Test
 
