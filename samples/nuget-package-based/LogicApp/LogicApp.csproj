@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8</TargetFramework>
@@ -6,6 +6,7 @@
     <MSBuildWarningsAsMessages>MSB3246;$(MSBuildWarningsAsMessages)</MSBuildWarningsAsMessages>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability" Version="0.1.0" />
     <PackageReference Include="Microsoft.Azure.Workflows.WebJobs.Extension" Version="1.94.69" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.6.0" />
   </ItemGroup>
@@ -28,9 +29,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <LibDirectory Include="$(MSBuildProjectDirectory)\lib\**\*"/>
+    <LibDirectory Include="$(MSBuildProjectDirectory)\lib\**\*" />
   </ItemGroup>
   <Target Name="CopyDynamicLibraries" AfterTargets="_GenerateFunctionsExtensionsMetadataPostPublish">
-    <Copy SourceFiles="@(LibDirectory)" DestinationFiles="@(LibDirectory->'$(MSBuildProjectDirectory)\$(PublishUrl)\lib\%(RecursiveDir)%(Filename)%(Extension)')"/>
+    <Copy SourceFiles="@(LibDirectory)" DestinationFiles="@(LibDirectory->'$(MSBuildProjectDirectory)\$(PublishUrl)\lib\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 </Project>
