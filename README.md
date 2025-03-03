@@ -45,6 +45,32 @@ There's a sample Logic App in `/samples/nuget-package-based/LogicApp` that uses 
    A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take awhile. 
 
 
+## Troubleshoot
+
+### Workflow processing failed. Error: 'The value '/serviceProviders/trackAvailabilityInAppInsights' provided for the 'serviceProviderConfiguration.serviceProviderId' for 'trackAvailabilityInAppInsights' is not valid.
+
+If you get this error, the Logic App is unable to locate the extension (service provider). Possible reasons:
+- The `Microsoft.Azure.Functions.ExtensionBundle.Workflows` extension bundle is configured in `host.json` and should be removed.
+- The app settings `AzureFunctionsJobHost__extensionBundle__id` and `AzureFunctionsJobHost__extensionBundle__version` are set and should be removed.
+- The assembly was not deployed. Make sure you are referencing the `LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability` package in your `.csproj`.  
+  Note that you can locally add the action to your workflow if it's installed in your local extension bundle (e.g. `%USERPROFILE%\.azure-functions-core-tools\Functions\ExtensionBundles\Microsoft.Azure.Functions.ExtensionBundle.Workflows\1.94.69\bin\extensions.json`), without adding the package reference.
+
+Stacktrace:
+
+```
+Workflow Error: operationName='WorkflowFunctionDefinitionProvider.GetFunctionMetadataAsync', message='Workflow processing failed. Error: 'The value '/serviceProviders/trackAvailabilityInAppInsights' provided for the 'serviceProviderConfiguration.serviceProviderId' for 'trackAvailabilityInAppInsights' is not valid.'', exception='Microsoft.Azure.Workflows.Common.ErrorResponses.ErrorResponseMessageException: The value '/serviceProviders/trackAvailabilityInAppInsights' provided for the 'serviceProviderConfiguration.serviceProviderId' for 'trackAvailabilityInAppInsights' is not valid.
+   at Microsoft.Azure.Workflows.Data.Engines.ServiceProviderEngine.ValidateAndGetServiceProvider(String serviceProviderId, String operationName)
+   at Microsoft.Azure.Workflows.Data.Engines.ServiceProviderEngine.GetRequiredLanguageWorkers(ServiceProviderConfiguration serviceProviderConfiguration)
+   at Microsoft.Azure.Workflows.WebJobs.Extensions.Initialization.WorkflowFunctionDefinitionProvider.GetServiceProviderLanguageWorkers(JToken serviceProviderJToken)
+   at Microsoft.Azure.Workflows.WebJobs.Extensions.Initialization.WorkflowFunctionDefinitionProvider.<>c__DisplayClass71_0.<AppendServiceProviderWorkerFunctions>b__3(KeyValuePair`2 actionKvp)
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.ToArray()
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at Microsoft.Azure.Workflows.WebJobs.Extensions.Initialization.WorkflowFunctionDefinitionProvider.AppendServiceProviderWorkerFunctions(FlowFunction[] flowFunctions, InsensitiveConcurrentDictionary`1 flowsProcessed, ConcurrentBag`1 functionMetadata)
+   at Microsoft.Azure.Workflows.WebJobs.Extensions.Initialization.WorkflowFunctionDefinitionProvider.LoadRequiredLanguageTriggerBinding(FlowFunction[] flowFunctions, InsensitiveConcurrentDictionary`1 flowsProcessed, ConcurrentBag`1 functionMetadata)
+   at Microsoft.Azure.Workflows.WebJobs.Extensions.Initialization.WorkflowFunctionDefinitionProvider.ProcessWorkflowFiles()
+   at Microsoft.Azure.Workflows.WebJobs.Extensions.Initialization.WorkflowFunctionDefinitionProvider.GetFunctionMetadataAsync()', extensionVersion='1.94.69.0', siteName='logic-aisquickstart-sdc-ai576', slotName='Production', activityId='00000000-0000-0000-0000-000000000000'.
+```
+
 ## Links
 
 - [Custom connectors in Azure Logic Apps](https://learn.microsoft.com/en-us/azure/logic-apps/custom-connector-overview)
