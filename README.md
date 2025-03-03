@@ -26,7 +26,7 @@ There's a sample Logic App in `/samples/nuget-package-based/LogicApp` that uses 
 
    > You can use the [Azure Integration Services Quickstart](https://github.com/ronaldbosma/azure-integration-services-quickstart) Azure Developer CLI template to deploy the necessary resources. 
    > Use `azd provision` to only deploy the infra and specify `true` for the `includeLogicApp` parameter. Other parameters can be `false`.  
-   > Note this template sets the .NET version `v9.0`, but it will automatically be changed to `v8.0` in the following step when using `func azure functionapp publish`.
+   > Note this template sets the .NET version `v9.0`, but it will automatically be changed to `v8.0` in when using `func azure functionapp publish` in one of the following steps.
 
 1. Remove the extension bundle environment variables.
    1. Navigate to the deployed Logic App and open the Environment variables tab. 
