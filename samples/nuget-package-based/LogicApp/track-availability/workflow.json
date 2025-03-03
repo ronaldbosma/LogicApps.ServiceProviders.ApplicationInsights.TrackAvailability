@@ -74,7 +74,7 @@
                 "type": "Response",
                 "kind": "Http",
                 "inputs": {
-                    "statusCode": 200,
+                    "statusCode": 503,
                     "body": {
                         "status": "unavailable"
                     }
