@@ -29,7 +29,7 @@ There's a [sample Logic App](/samples/nuget-package-based/LogicApp/) in `/sample
 > Use `azd provision` to only deploy the infra and specify `true` for the `includeLogicApp` parameter. Other parameters can be `false`.  
 > Note this template sets the .NET version to `v9.0`, but it will automatically be changed to `v8.0` when using `func azure functionapp publish` to deploy the sample.
 
-1. Remove the extension bundle environment variables. his is necessary because the extension bundle else the extension won't be loaded.
+1. Remove the extension bundle environment variables. This is necessary because else the extension won't load.
    1. Navigate to the deployed Logic App and open the Environment variables tab. 
    1. Remove the `AzureFunctionsJobHost__extensionBundle__id` and `AzureFunctionsJobHost__extensionBundle__version` variables and save the changes. 
    
@@ -51,9 +51,9 @@ Follow these steps after deploying the sample Logic App to test it:
 1. Navigate to the deployed workflow and copy the URL of the HTTP trigger.
 1. Open the [tests.https](/tests/tests.http) file.
 1. Use the copied URL for the value of the `@workflowUrl` variable.
-1. Send the first request. A `200 OK` with status 'available` in the response body should be returned.
-1. Send the second request. A `503 Service Unavailable` with status 'unavailable` in the response body should be returned.
-1. Navigate to Application Insights and open the Availability tab. You should see the results for the `My Test` availability test (result might take a few minutes to appear).
+1. Send the first request. A `200 OK` with status 'available' in the response body should be returned.
+1. Send the second request. A `503 Service Unavailable` with status 'unavailable' in the response body should be returned.
+1. Navigate to Application Insights and open the Availability tab. You should see the results for the `My Test` availability test (the result might take a few minutes to appear).
 
 ## Troubleshoot
 
