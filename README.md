@@ -24,10 +24,10 @@ There's a [sample Logic App](/samples/nuget-package-based/LogicApp/) in `/sample
 
 1. Deploy an Azure Logic App Standard connected to an Azure Application Insights instance with .NET version `v6.0` or `v8.0`.  
 
-   > [!NOTE]  
-   > You can use the [Azure Integration Services Quickstart](https://github.com/ronaldbosma/azure-integration-services-quickstart) Azure Developer CLI template to deploy the necessary resources. 
-   > Use `azd provision` to only deploy the infra and specify `true` for the `includeLogicApp` parameter. Other parameters can be `false`.  
-   > Note this template sets the .NET version to `v9.0`, but it will automatically be changed to `v8.0` when using `func azure functionapp publish` to deploy the sample.
+> [!NOTE]  
+> You can use the [Azure Integration Services Quickstart](https://github.com/ronaldbosma/azure-integration-services-quickstart) Azure Developer CLI template to deploy the necessary resources. 
+> Use `azd provision` to only deploy the infra and specify `true` for the `includeLogicApp` parameter. Other parameters can be `false`.  
+> Note this template sets the .NET version to `v9.0`, but it will automatically be changed to `v8.0` when using `func azure functionapp publish` to deploy the sample.
 
 1. Remove the extension bundle environment variables. his is necessary because the extension bundle else the extension won't be loaded.
    1. Navigate to the deployed Logic App and open the Environment variables tab. 
@@ -41,8 +41,8 @@ There's a [sample Logic App](/samples/nuget-package-based/LogicApp/) in `/sample
       func azure functionapp publish <logicAppName>
       ```
 
-   > [!IMPORTANT]  
-   > A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take awhile. 
+> [!IMPORTANT]  
+> A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take awhile. 
 
 ### Test
 
