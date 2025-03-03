@@ -140,5 +140,6 @@ $nuGetPackagePath = Join-Path -Path $nuGetPackagePath -ChildPath "Debug"
 
 $targetProjectDirectory = Join-Path -Path $rootPath -ChildPath "samples"
 $targetProjectDirectory = Join-Path -Path $targetProjectDirectory -ChildPath "nuget-package-based"
+$targetProjectDirectory = Join-Path -Path $targetProjectDirectory -ChildPath "LogicApp"
 
 add-extension -Path $nuGetPackagePath -Name "LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability" -Version "0.1.0" -TargetProjectDirectory $targetProjectDirectory
