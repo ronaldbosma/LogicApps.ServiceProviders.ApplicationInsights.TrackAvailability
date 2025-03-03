@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ProjectGuid>c3f652e5-a463-4552-b240-92bd39528994</ProjectGuid>
+    <AssemblyName>LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability</AssemblyName>
+    <TargetFramework>net6.0</TargetFramework>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability.snk</AssemblyOriginatorKeyFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability</PackageId>
+    <Description>Logic App connector to track availability in Application Insights</Description>
+    <Authors>Ronald Bosma</Authors>
+    <PackageTags>net6.0;Azure;ApplicationInsights;AzureLogicApps;CustomConnector;LogicApps</PackageTags>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Workflows.WebJobs.Extension" Version="[1.94.69,2)" />
+  </ItemGroup>
+</Project>
