@@ -1,5 +1,5 @@
 # Set this to the URL of your workflow
-@workflowUrl = "..."
+@workflowUrl = <workflow-url>
 
 ###
 

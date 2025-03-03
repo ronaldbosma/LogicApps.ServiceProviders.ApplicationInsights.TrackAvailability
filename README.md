@@ -44,6 +44,16 @@ There's a sample Logic App in `/samples/nuget-package-based/LogicApp` that uses 
 
    A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take awhile. 
 
+### Test
+
+Follow these steps after deploying the sample Logic App to test it:
+
+1. Navigate to the deployed workflow and copy the URL of the HTTP trigger.
+1. Open the [tests.https](/tests/tests.http) file.
+1. Use the copied URL for the value of the `@workflowUrl` variable.
+1. Send the first request. A `200 OK` with status 'available` in the response body should be returned.
+1. Send the second request. A `503 Service Unavailable` with status 'unavailable` in the response body should be returned.
+
 
 ## Troubleshoot
 
