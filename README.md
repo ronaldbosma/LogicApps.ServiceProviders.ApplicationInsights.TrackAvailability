@@ -21,13 +21,15 @@ You can now use the connector in the Visual Studio Code Logic App Designer. Sear
 ![Add Action](./images/add-track-availability-action.png)
 
 
-## Deploy Sample
+## Sample
 
 There's a [sample Logic App](/samples/nuget-package-based/LogicApp/) in `/samples/nuget-package-based/LogicApp` that uses the custom connector. Because of the custom connector, it's a NuGet package-based Logic App with a `.csproj` file.
 
 The sample workflow receives a request with a URL to check and a test name. It will check if the URL is available and send the result to Azure Application Insights. See the following image for the workflow overview.
 
 ![Sample Workflow](/images/sample-workflow.png)
+
+### Deploy Sample
 
 To deploy this sample, follow these steps:
 
@@ -53,7 +55,7 @@ To deploy this sample, follow these steps:
 > [!IMPORTANT]  
 > A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take a while. 
 
-### Test
+### Test Sample
 
 Follow these steps after deploying the sample Logic App to test it:
 
