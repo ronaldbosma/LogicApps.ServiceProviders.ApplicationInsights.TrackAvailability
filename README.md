@@ -16,11 +16,20 @@ This package contains a custom built-in connector for Standard Logic Apps. It co
        E.g. `%USERPROFILE%\.azure-functions-core-tools\Functions\ExtensionBundles\Microsoft.Azure.Functions.ExtensionBundle.Workflows\1.94.69\bin\extensions.json`
     1. Copies the extension DLL to the extension bundle directory.
 
-You can now use the connector in the Visual Studio Code Logic App Designer.
+You can now use the connector in the Visual Studio Code Logic App Designer. Search for `Track Availability` in the action list. You should see the following action:
+
+![Add Action](./images/add-track-availability-action.png)
+
 
 ## Deploy Sample
 
-There's a [sample Logic App](/samples/nuget-package-based/LogicApp/) in `/samples/nuget-package-based/LogicApp` that uses the custom connector. Because of the custom connector, it's a NuGet package-based Logic App with a `.csproj` file. To deploy this sample, follow these steps:
+There's a [sample Logic App](/samples/nuget-package-based/LogicApp/) in `/samples/nuget-package-based/LogicApp` that uses the custom connector. Because of the custom connector, it's a NuGet package-based Logic App with a `.csproj` file.
+
+The sample workflow receives a request with a URL to check and a test name. It will check if the URL is available and send the result to Azure Application Insights. See the following image for the workflow overview.
+
+![Sample Workflow](/images/sample-workflow.png)
+
+To deploy this sample, follow these steps:
 
 1. Deploy an Azure Logic App Standard connected to an Azure Application Insights instance with .NET version `v6.0` or `v8.0`.  
 
@@ -54,6 +63,8 @@ Follow these steps after deploying the sample Logic App to test it:
 1. Send the first request. A `200 OK` with status 'available' in the response body should be returned.
 1. Send the second request. A `503 Service Unavailable` with status 'unavailable' in the response body should be returned.
 1. Navigate to Application Insights and open the Availability tab. You should see the results for the `My Test` availability test (the result might take a few minutes to appear).
+
+   ![Availability Test Result](/images/availability-test-result.png)
 
 ## Troubleshoot
 
