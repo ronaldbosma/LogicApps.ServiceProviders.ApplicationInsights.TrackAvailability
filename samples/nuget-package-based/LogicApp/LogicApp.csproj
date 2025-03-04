@@ -6,7 +6,7 @@
     <MSBuildWarningsAsMessages>MSB3246;$(MSBuildWarningsAsMessages)</MSBuildWarningsAsMessages>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability" Version="0.1.0" />
+    <PackageReference Include="LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability" Version="0.2.2" />
     <PackageReference Include="Microsoft.Azure.Workflows.WebJobs.Extension" Version="1.94.69" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.6.0" />
   </ItemGroup>

@@ -135,4 +135,4 @@ $targetProjectFile = Join-Path -Path $targetProjectFile -ChildPath "nuget-packag
 $targetProjectFile = Join-Path -Path $targetProjectFile -ChildPath "LogicApp"
 $targetProjectFile = Join-Path -Path $targetProjectFile -ChildPath "LogicApp.csproj"
 
-add-extension -Path $nuGetPackagePath -Name "LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability" -Version "0.1.0" -TargetProjectFile $targetProjectFile
+add-extension -Path $nuGetPackagePath -Name "LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability" -Version "0.2.2" -TargetProjectFile $targetProjectFile
