@@ -25,12 +25,12 @@
                     }
                 },
                 "runAfter": {
-                    "Track_availability_in_App_Insights": [
+                    "Track_is_available_(in_App_Insights)": [
                         "SUCCEEDED"
                     ]
                 }
             },
-            "Track_availability_in_App_Insights": {
+            "Track_is_available_(in_App_Insights)": {
                 "type": "ServiceProvider",
                 "inputs": {
                     "parameters": {
@@ -49,7 +49,7 @@
                     ]
                 }
             },
-            "Track_unavailability_in_App_Insights": {
+            "Track_is_unavailable_(in_App_Insights)": {
                 "type": "ServiceProvider",
                 "inputs": {
                     "parameters": {
@@ -80,7 +80,7 @@
                     }
                 },
                 "runAfter": {
-                    "Track_unavailability_in_App_Insights": [
+                    "Track_is_unavailable_(in_App_Insights)": [
                         "SUCCEEDED"
                     ]
                 }
