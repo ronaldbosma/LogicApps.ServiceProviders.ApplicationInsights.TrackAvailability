@@ -162,7 +162,7 @@ namespace LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability
                     BrandColor = Color.LightSkyBlue.ToHexColor(),
                     DisplayName = "Track availability in App Insights",
                     Description = "Track availability of a service in Application Insights.",
-                    IconUri = new Uri("https://raw.githubusercontent.com/plantuml-stdlib/Azure-PlantUML/f360835f8794e18bed6520bb2eea56b482816d95/dist/DevOps/AzureApplicationInsights.png"),
+                    IconUri = new Uri(Resources.Icon),
                     Capabilities = new[] { ApiCapability.Actions },
                     ConnectionParameters = new ConnectionParameters
                     {
@@ -205,7 +205,7 @@ namespace LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability
                     OperationType = OperationType.ServiceProvider,
                     Capabilities = new[] { ApiCapability.Actions },
                     BrandColor = Color.LightSkyBlue.ToHexColor(),
-                    IconUri = new Uri("https://raw.githubusercontent.com/plantuml-stdlib/Azure-PlantUML/f360835f8794e18bed6520bb2eea56b482816d95/dist/DevOps/AzureApplicationInsights.png")
+                    IconUri = new Uri(Resources.Icon)
                 }
             };
         }

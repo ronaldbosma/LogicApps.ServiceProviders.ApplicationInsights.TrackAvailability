@@ -4,7 +4,7 @@
     <ProjectGuid>c3f652e5-a463-4552-b240-92bd39528994</ProjectGuid>
     <AssemblyName>LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability</AssemblyName>
     <TargetFramework>net6.0</TargetFramework>
-    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionPrefix>0.2.2</VersionPrefix>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <SignAssembly>true</SignAssembly>
@@ -23,5 +23,20 @@
   
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Workflows.WebJobs.Extension" Version="[1.94.69,2)" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
