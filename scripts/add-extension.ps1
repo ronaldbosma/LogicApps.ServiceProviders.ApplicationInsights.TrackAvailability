@@ -59,8 +59,8 @@ function add-extension
             throw "Extension bundle module path does not exist $extensionModulePath"
       }
 
-      $latest = Get-ChildItem -Path $extensionModulePath | Sort-Object name -Descending | Select-Object -First 1
-      $latest.name
+      $latest = Get-ChildItem -Path $extensionModulePath | Sort-Object { [version]$_.Name } -Descending | Select-Object -First 1
+      write-host "Latest extension bundle version is: $($latest.name)"
 
       $extensionModulePath = Join-Path -Path $extensionModulePath -ChildPath $latest.name 
       $extensionModulePath = Join-Path -Path $extensionModulePath -ChildPath "bin"
