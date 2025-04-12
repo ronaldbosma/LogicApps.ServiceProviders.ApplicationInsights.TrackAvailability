@@ -9,7 +9,8 @@ This package contains a custom built-in connector for Standard Logic Apps. It co
 
 There's a [sample Logic App](/samples/LogicAppNuGetBased/LogicApp/) in `/samples/LogicAppNuGetBased/LogicApp` that uses the custom connector. Because of the custom connector, it's a NuGet package-based Logic App with a `.csproj` file.
 
-> When I first converted the sample project to a NuGet package-based Logic App, I was able to open the sample workflow in the Logic App Designer in VS Code. However, after closing VS Code and reopening it, I keep getting the error '...'. I'm not sure how to fix this yet.
+> When I first converted the sample project to a NuGet package-based Logic App, I was able to open the sample workflow in the Logic App Designer in VS Code. However, after closing VS Code and reopening it, I keep getting the following error and I'm not sure how to fix it yet:  
+> ![](/images/error-opening-vscode-designer.png)
 
 The sample workflow expects a request with a URL to check and a test name. It will check if the URL is available and send the result to Azure Application Insights. See the following image for the workflow overview.
 
