@@ -9,7 +9,7 @@ This package contains a custom built-in connector for Standard Logic Apps. It co
 
 1. Build the [LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability](/src/LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability.csproj) project. This will generate the NuGet package in the `/bin/Debug` folder of the project.
 
-1. Execute the [add-extension.ps1](/script/add-extension.ps1) PowerShell script to install the extension locally. This script:
+1. Execute the [add-extension.ps1](/scripts/add-extension.ps1) PowerShell script to install the extension locally. This script:
 
     1. Adds the NuGet package to the [project file](/samples/nuget-package-based/LogicApp/LogicApp.csproj) of the sample LogicApp project.
     1. Adds an entry to the local extension bundle file of your Azure Functions Core Tools installation. 
