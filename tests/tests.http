@@ -3,7 +3,7 @@
 
 ###
 
-# Test a valid URL
+# Test a valid URL - Should return 200 OK
 POST {{workflowUrl}}
 Content-Type: application/json
 
@@ -14,7 +14,7 @@ Content-Type: application/json
 
 ###
 
-# Test an invalid URL
+# Test an invalid URL - Should return 503 Service Unavailable
 POST {{workflowUrl}}
 Content-Type: application/json
 
