@@ -5,33 +5,21 @@ This package contains a custom built-in connector for Standard Logic Apps. It co
 > [!IMPORTANT]  
 > This NuGet package is still under development and is not yet available on nuget.org
 
-## Local Development
-
-1. Build the [LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability](/src/LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability.csproj) project. This will generate the NuGet package in the `/bin/Debug` folder of the project.
-
-1. Execute the [add-extension.ps1](/scripts/add-extension.ps1) PowerShell script to install the extension locally. This script:
-
-    1. Adds the NuGet package to the [project file](/samples/LogicAppNuGetBased/LogicApp/LogicApp.csproj) of the sample LogicApp project.
-    1. Adds an entry to the local extension bundle file of your Azure Functions Core Tools installation. 
-       E.g. `%USERPROFILE%\.azure-functions-core-tools\Functions\ExtensionBundles\Microsoft.Azure.Functions.ExtensionBundle.Workflows\1.94.69\bin\extensions.json`
-    1. Copies the extension DLL to the extension bundle directory.
-
-You can now use the connector in the Visual Studio Code Logic App Designer. Search for `Track Availability` in the action list. You should see the following action:
-
-![Add Action](./images/add-track-availability-action.png)
-
-
 ## Sample
 
 There's a [sample Logic App](/samples/LogicAppNuGetBased/LogicApp/) in `/samples/LogicAppNuGetBased/LogicApp` that uses the custom connector. Because of the custom connector, it's a NuGet package-based Logic App with a `.csproj` file.
+
+> When I first converted the sample project to a NuGet package-based Logic App, I was able to open the sample workflow in the Logic App Designer in VS Code. However, after closing VS Code and reopening it, I keep getting the error '...'. I'm not sure how to fix this yet.
 
 The sample workflow expects a request with a URL to check and a test name. It will check if the URL is available and send the result to Azure Application Insights. See the following image for the workflow overview.
 
 ![Sample Workflow](/images/sample-workflow.png)
 
-### Deploy Sample
+### Deploy
 
-To deploy this sample, follow these steps:
+#### Logic App Standard
+
+First, you'll need a Logic App Standard:
 
 1. Deploy an Azure Logic App Standard connected to an Azure Application Insights instance with .NET version `v6.0` or `v8.0`.  
 
@@ -40,22 +28,43 @@ To deploy this sample, follow these steps:
 > Use `azd provision` to only deploy the infra and specify `true` for the `includeLogicApp` parameter. Other parameters can be `false`.  
 > Note this template sets the .NET version to `v9.0`, but it will automatically be changed to `v8.0` when using `func azure functionapp publish` to deploy the sample.
 
-2. Remove the extension bundle environment variables. This is necessary because else the extension won't load.
+1. Remove the extension bundle environment variables. This is necessary because else the extension with custom connector won't load.
    1. Navigate to the deployed Logic App and open the Environment variables tab. 
    1. Remove the `AzureFunctionsJobHost__extensionBundle__id` and `AzureFunctionsJobHost__extensionBundle__version` variables and save the changes. 
-   
-1. Deploy the sample.
-   1. Open a terminal and navigate to the `/samples/LogicAppNuGetBased/LogicApp` directory.
-   1. Execute the following command. Replace `<logicAppName>` with your Logic App name. This will build and deploy the Logic App.
 
-      ```bash
-      func azure functionapp publish <logicAppName>
-      ```
+#### Connector
+
+The custom connector isn't available as a NuGet package yet, so you need to build and install it locally. Follow these steps:
+
+1. Build the [LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability](/src/LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability.csproj) project. This will generate the NuGet package in the `/bin/Debug` folder of the project.
+
+1. Execute the [/scripts/add-extension.ps1](/scripts/add-extension.ps1) PowerShell script to install the extension locally. This script:
+
+    1. Adds the NuGet package to the [project file](/samples/LogicAppNuGetBased/LogicApp/LogicApp.csproj) of the sample LogicApp project.
+    1. Adds an entry to the local extension bundle file of your Azure Functions Core Tools installation. 
+       E.g. `%USERPROFILE%\.azure-functions-core-tools\Functions\ExtensionBundles\Microsoft.Azure.Functions.ExtensionBundle.Workflows\1.94.69\bin\extensions.json`
+    1. Copies the extension DLL to the extension bundle directory.
+
+   You can now use the connector in the Visual Studio Code Logic App Designer. Search for `Track Availability` in the action list. You should see the following action:
+
+   ![Add Action](./images/add-track-availability-action.png)
+
+#### Workflow 
+
+Now you can deploy the sample workflow. Follow these steps:
+
+1. Open a terminal and navigate to the `/samples/LogicAppNuGetBased/LogicApp` directory.
+
+1. Execute the following command. Replace `<logicAppName>` with your Logic App name. This will build and deploy the Logic App.
+
+   ```bash
+   func azure functionapp publish <logicAppName> --dotnet
+   ```
 
 > [!IMPORTANT]  
 > A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take a while. 
 
-### Test Sample
+### Test
 
 Follow these steps after deploying the sample Logic App to test it:
 
