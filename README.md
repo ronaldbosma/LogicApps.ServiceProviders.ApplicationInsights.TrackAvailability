@@ -25,7 +25,7 @@ You can now use the connector in the Visual Studio Code Logic App Designer. Sear
 
 There's a [sample Logic App](/samples/LogicAppNuGetBased/LogicApp/) in `/samples/LogicAppNuGetBased/LogicApp` that uses the custom connector. Because of the custom connector, it's a NuGet package-based Logic App with a `.csproj` file.
 
-The sample workflow receives a request with a URL to check and a test name. It will check if the URL is available and send the result to Azure Application Insights. See the following image for the workflow overview.
+The sample workflow expects a request with a URL to check and a test name. It will check if the URL is available and send the result to Azure Application Insights. See the following image for the workflow overview.
 
 ![Sample Workflow](/images/sample-workflow.png)
 
@@ -40,7 +40,7 @@ To deploy this sample, follow these steps:
 > Use `azd provision` to only deploy the infra and specify `true` for the `includeLogicApp` parameter. Other parameters can be `false`.  
 > Note this template sets the .NET version to `v9.0`, but it will automatically be changed to `v8.0` when using `func azure functionapp publish` to deploy the sample.
 
-1. Remove the extension bundle environment variables. This is necessary because else the extension won't load.
+2. Remove the extension bundle environment variables. This is necessary because else the extension won't load.
    1. Navigate to the deployed Logic App and open the Environment variables tab. 
    1. Remove the `AzureFunctionsJobHost__extensionBundle__id` and `AzureFunctionsJobHost__extensionBundle__version` variables and save the changes. 
    
