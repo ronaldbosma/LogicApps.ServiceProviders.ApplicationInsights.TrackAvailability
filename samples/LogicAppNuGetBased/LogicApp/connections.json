@@ -1,0 +1,14 @@
+{
+  "managedApiConnections": {},
+  "serviceProviderConnections": {
+    "trackAvailabilityInAppInsights": {
+      "parameterValues": {
+        "connectionString": "@appsetting('APPLICATIONINSIGHTS_CONNECTION_STRING')"
+      },
+      "serviceProvider": {
+        "id": "/serviceProviders/trackAvailabilityInAppInsights"
+      },
+      "displayName": "appInsights"
+    }
+  }
+}
