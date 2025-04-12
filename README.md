@@ -1,11 +1,14 @@
+> [!IMPORTANT]  
+> This NuGet package is still under development and is not yet available on nuget.org
+
+---
+
 # LogicApps.ServiceProviders.ApplicationInsights.TrackAvailability
 
 This package contains a custom built-in connector for Standard Logic Apps. It contains an action that can send an availability test result to Azure Application Insights.
 
 ![Track Availability Action](./images/add-track-availability-action.png)
 
-> [!IMPORTANT]  
-> This NuGet package is still under development and is not yet available on nuget.org
 
 ## Sample
 
