@@ -2,6 +2,8 @@
 
 This package contains a custom built-in connector for Standard Logic Apps. It contains an action that can send an availability test result to Azure Application Insights.
 
+![Track Availability Action](./images/add-track-availability-action.png)
+
 > [!IMPORTANT]  
 > This NuGet package is still under development and is not yet available on nuget.org
 
@@ -45,10 +47,6 @@ The custom connector isn't available as a NuGet package yet, so you need to buil
     1. Adds an entry to the local extension bundle file of your Azure Functions Core Tools installation. 
        E.g. `%USERPROFILE%\.azure-functions-core-tools\Functions\ExtensionBundles\Microsoft.Azure.Functions.ExtensionBundle.Workflows\1.94.69\bin\extensions.json`
     1. Copies the extension DLL to the extension bundle directory.
-
-   You can now use the connector in the Visual Studio Code Logic App Designer. Search for `Track Availability` in the action list. You should see the following action:
-
-   ![Add Action](./images/add-track-availability-action.png)
 
 #### Workflow 
 
