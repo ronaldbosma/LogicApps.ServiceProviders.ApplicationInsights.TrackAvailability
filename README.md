@@ -11,7 +11,7 @@ This package contains a custom built-in connector for Standard Logic Apps. It co
 
 1. Execute the [add-extension.ps1](/scripts/add-extension.ps1) PowerShell script to install the extension locally. This script:
 
-    1. Adds the NuGet package to the [project file](/samples/nuget-package-based/LogicApp/LogicApp.csproj) of the sample LogicApp project.
+    1. Adds the NuGet package to the [project file](/samples/LogicAppNuGetBased/LogicApp/LogicApp.csproj) of the sample LogicApp project.
     1. Adds an entry to the local extension bundle file of your Azure Functions Core Tools installation. 
        E.g. `%USERPROFILE%\.azure-functions-core-tools\Functions\ExtensionBundles\Microsoft.Azure.Functions.ExtensionBundle.Workflows\1.94.69\bin\extensions.json`
     1. Copies the extension DLL to the extension bundle directory.
@@ -23,7 +23,7 @@ You can now use the connector in the Visual Studio Code Logic App Designer. Sear
 
 ## Sample
 
-There's a [sample Logic App](/samples/nuget-package-based/LogicApp/) in `/samples/nuget-package-based/LogicApp` that uses the custom connector. Because of the custom connector, it's a NuGet package-based Logic App with a `.csproj` file.
+There's a [sample Logic App](/samples/LogicAppNuGetBased/LogicApp/) in `/samples/LogicAppNuGetBased/LogicApp` that uses the custom connector. Because of the custom connector, it's a NuGet package-based Logic App with a `.csproj` file.
 
 The sample workflow receives a request with a URL to check and a test name. It will check if the URL is available and send the result to Azure Application Insights. See the following image for the workflow overview.
 
@@ -45,7 +45,7 @@ To deploy this sample, follow these steps:
    1. Remove the `AzureFunctionsJobHost__extensionBundle__id` and `AzureFunctionsJobHost__extensionBundle__version` variables and save the changes. 
    
 1. Deploy the sample.
-   1. Open a terminal and navigate to the `/samples/nuget-package-based/LogicApp` directory.
+   1. Open a terminal and navigate to the `/samples/LogicAppNuGetBased/LogicApp` directory.
    1. Execute the following command. Replace `<logicAppName>` with your Logic App name. This will build and deploy the Logic App.
 
       ```bash

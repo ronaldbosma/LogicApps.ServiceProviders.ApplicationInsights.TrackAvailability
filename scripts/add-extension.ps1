@@ -131,7 +131,7 @@ $nuGetPackagePath = Join-Path -Path $nuGetPackagePath -ChildPath "bin"
 $nuGetPackagePath = Join-Path -Path $nuGetPackagePath -ChildPath "Debug"
 
 $targetProjectFile = Join-Path -Path $rootPath -ChildPath "samples"
-$targetProjectFile = Join-Path -Path $targetProjectFile -ChildPath "nuget-package-based"
+$targetProjectFile = Join-Path -Path $targetProjectFile -ChildPath "LogicAppNuGetBased"
 $targetProjectFile = Join-Path -Path $targetProjectFile -ChildPath "LogicApp"
 $targetProjectFile = Join-Path -Path $targetProjectFile -ChildPath "LogicApp.csproj"
 
