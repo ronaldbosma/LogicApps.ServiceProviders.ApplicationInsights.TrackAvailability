@@ -64,7 +64,9 @@ Now you can deploy the sample workflow. Follow these steps:
    ```
 
 > [!IMPORTANT]  
-> A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take a while. 
+> A big downside of having to use a NuGet-package based project is that you have to deploy the `Microsoft.Azure.Workflows.WebJobs.Extension` package with all its dependencies, which is more than 300MB. So the deployment might take a while.  
+>
+> I've created an alternative solution in [Track Availability in Application Insights](https://github.com/ronaldbosma/track-availability-in-app-insights) where I use a [Logic App with custom .NET code](https://learn.microsoft.com/en-us/azure/logic-apps/create-run-custom-code-functions). It is much smaller and faster to deploy, but you have to include the custom code in your Logic App.
 
 ### Test
 
