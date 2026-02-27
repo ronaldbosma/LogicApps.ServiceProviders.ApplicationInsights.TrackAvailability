@@ -31,8 +31,7 @@ First, you'll need a Logic App Standard:
 
 > [!NOTE]  
 > You can use the [Azure Integration Services Quickstart](https://github.com/ronaldbosma/azure-integration-services-quickstart) Azure Developer CLI template to deploy the necessary resources. 
-> Use `azd provision` to only deploy the infra and specify `true` for the `includeLogicApp` parameter. Other parameters can be `false`.  
-> Note this template sets the .NET version to `v9.0`, but it will automatically be changed to `v8.0` when using `func azure functionapp publish` to deploy the sample.
+> Use `azd provision` to only deploy the infra and specify `true` for the `includeLogicApp` parameter. Other parameters can be `false`.
 
 1. Remove the extension bundle environment variables. This is necessary because else the extension with custom connector won't load.
    1. Navigate to the deployed Logic App and open the Environment variables tab. 
@@ -112,3 +111,4 @@ Workflow Error: operationName='WorkflowFunctionDefinitionProvider.GetFunctionMet
 - [Custom connectors in Azure Logic Apps](https://learn.microsoft.com/en-us/azure/logic-apps/custom-connector-overview)
 - [Create custom built-in connectors for Standard logic apps in single-tenant Azure Logic Apps](https://learn.microsoft.com/en-us/azure/logic-apps/create-custom-built-in-connector-standard)
 - [ Sample custom built-in Azure Cosmos DB connector - Azure Logic Apps Connector Extensions](https://github.com/Azure/logicapps-connector-extensions/tree/CosmosDB/src/CosmosDB)
+
